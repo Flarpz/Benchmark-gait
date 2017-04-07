@@ -65,8 +65,22 @@ module.exports = {
 
     },
 
-    get_result: function () {
+    get_result: function (run1,callback) {
+        // Select collection "Users"
+        let collection = mongodbConnection.collection('Result');
+        // trying to fetch data.user in db
 
+        collection.find({run : run1}).toArray(function (err, docs) {
+            //console.log("Found the following records");
+            // found user, call callback for regiseter
+            if (docs.length > 0) {
+                callback(docs);
+            }
+            else{
+                console.log('error');
+            }
+
+        });
     }
 
     //Connect
